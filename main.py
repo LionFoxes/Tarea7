@@ -43,4 +43,4 @@ d = {"ojo": "eye", "otro": "another", "con": "with", "amigo": "friend", "eso": "
 # print(traducir(d, "ojo con eso manito"))
 
 
-def
+
