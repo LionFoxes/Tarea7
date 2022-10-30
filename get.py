@@ -117,6 +117,7 @@ print(crear_matriz_dispersa([[1, 0, 0, 0, 0, 4, 0, 5],
 # Punto 7 #
 
 
+
 def organizar_palabras(cad):
     dic = {}
     c = cad.split()
