@@ -42,7 +42,44 @@ def es_panagrama(cad):
     return len(paragrama) == len(solo_letras)  # Compara las longitudes, si ambas son iguales es que esta contenido
 
 
-print(es_panagrama("Un jugoso zumo de piña y kiwi bien frio es exquisito y no lleva alcohol.".lower()))
+
+# Punto 3
+cursos = {"Introducción a la Programación": [["Pepito Perez", "892324", 4.0],
+["Rivaldo Rodriguez", "434335", 4.3],
+["Novita Caicedo", "442565", 3.4],
+["Manuela Beltran", "2323232", 4.1]], "Matemáticas": [["Pepito Perez", "892324", 4.0],
+["Ruperto Gutierrez", "111335", 4.3],
+["Lupita Gallego", "789232", 4.8],
+["Novita Caicedo", "442565", 3.4]], "Humanidades": [["Eric Cartman", "343422", 2.0],
+["Stan Marsh", "22999", 3.3],
+["Novita Caicedo", "442565", 3.4]]}
+
+
+def obtener_estudiantes(curso):
+    ans = []
+    for i in curso.values():
+        for j in i:
+            estudiantes = j[0]
+            if estudiantes not in ans:
+                ans.append(estudiantes)
+    return ans
+
+
+# print(obtener_estudiantes(cursos))
+
+
+def estudiantes_en_comun(cursos, materia1, materia2):
+    ans = []
+    curso1 = cursos[materia1]
+    curso2 = cursos[materia2]
+    for i in curso1:
+        estudiantes_curso1 = (i[0], i[1])
+        for j in curso2:
+            estudiantes_curso2 = (j[0], j[1])
+            if estudiantes_curso1 == estudiantes_curso2:
+                ans.append(estudiantes_curso1)
+    return ans
+
 
 
 # punto 5
