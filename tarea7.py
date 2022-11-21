@@ -115,7 +115,6 @@ def profesores_para_curso(diccionario_profesor_curso, materia):
 
 def estudiantes_con_profesor(cursos, diccionario_profesor_curso, profesor):
     ans = []
-    materia = cursos.keys()
     for i in cursos.values():
         for j in i:
             estudiantes = j[0]

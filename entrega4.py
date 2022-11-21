@@ -54,7 +54,7 @@ for single_input in tomar_input():
     queries = single_input[1].split(";")
     print("Key of", key)
     major_scale_pos, major_scale = generate_major_scale(key)
-    print(major_scale)
+    # print(major_scale)
     for query in queries:
         note, direction, interval = query.split(" ")
         was_scale_2 = True
