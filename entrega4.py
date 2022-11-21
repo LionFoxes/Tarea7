@@ -15,10 +15,23 @@ notes_2 = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 
 translation = {"SECOND": 1, "THIRD": 2, "FOURTH": 3, "FIFTH": 4, "SIXTH": 5, "SEVENTH": 6, "OCTAVE": 7}
 
+"""
+Función = generate major scale
+
+Entrada = key --> la nota principal que se toma como una llave, scale, scale_2, notes, notes_2.
+  
+Salida = major_scale_pos, major_scale. 
+
+Propósito = darnos una lista que contiene las notas que son aceptadas,
+teniendo en cuanta el tono y semitono (lista).
+Ademas de un diccionario a posición de estas mismas notas, teniendo en cuenta los tonos y 
+semitonos que se utilizan, representada por el valor en el diccionario 
+"""
+
 
 def generate_major_scale(key):
     major_scale_pos = {}
-    major_scale = [""] * 7  # Hace un arreglo con 6 posibles posiciones para el rango de la escala de la nota
+    major_scale = [""] * 7
     index = 0
     if key in scale:
         index = scale[key]
@@ -32,13 +45,23 @@ def generate_major_scale(key):
             index += 1
         else:
             index += 2
-
         major_scale_pos[notes_2[index % 12]] = i
         major_scale[i] = notes_2[index % 12]
 
     return major_scale_pos, major_scale
 
 
+"""
+Función = tomar input
+
+Entrada = todos los inputs que realice el usuario hasta que encuentre vació 
+
+Salida = todas las llaves y todas las instrucciones para cada llave 
+
+Propósito = Darnos los inputs que el usuario nos da y guardarlos en dos variables llamadas "key" y
+"queries", con key --> la nota llave, quieres --> las indicaciones que evaluamos la nota con la 
+llave
+"""
 def tomar_input():
     inputs = []
     while True:
@@ -48,7 +71,11 @@ def tomar_input():
         queries = input()
         inputs.append((key, queries))
 
-
+"""
+Propósito: este parte del código tiene como propósito hace todas las evaluaciones para conocer si 
+la nota se encuentra dentro de la escala puesta por la llave, y si es esto es verdadero entonces 
+leer la dirección y la posición donde cae.   
+"""
 for single_input in tomar_input():
     key = single_input[0]
     queries = single_input[1].split(";")
