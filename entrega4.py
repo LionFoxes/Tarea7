@@ -18,7 +18,8 @@ translation = {"SECOND": 1, "THIRD": 2, "FOURTH": 3, "FIFTH": 4, "SIXTH": 5, "SE
 """
 Función = generate major scale
 
-Entrada = key --> la nota principal que se toma como una llave, scale, scale_2, notes, notes_2.
+Entrada = key --> la nota principal que se toma como una llave tipo string, 
+scale diccionario, scale_2 diccionario, notes lista, notes_2 lista.
   
 Salida = major_scale_pos, major_scale. 
 
@@ -106,9 +107,9 @@ def problema_449():
 
             if note_2 not in major_scale_pos:
                 if was_scale_2:
-                    print(f"{note_2}: invalid note for this key")
+                    print({note_2}, ": invalid note for this key")
                 else:
-                    print(f"{note}: invalid note for this key")
+                    print({note}, ": invalid note for this key")
             else:
                 if direction == "UP":
                     next_note = major_scale[(major_scale_pos[note_2] + translation[interval]) % 7]
@@ -116,7 +117,7 @@ def problema_449():
                     next_note = major_scale[(major_scale_pos[note_2] - translation[interval]) % 7]
 
                 if was_scale_2:
-                    print(f"{note_2}: {direction} {interval} > {next_note}")
+                    print({note_2}, ":", {direction}, {interval}, ">", {next_note})
                 else:
-                    print(f"{note}: {direction} {interval} > {notes[scale_2[next_note]]}")
+                    print({note}, ":", {direction}, {interval}, ">", {notes[scale_2[next_note]]})
         print()
