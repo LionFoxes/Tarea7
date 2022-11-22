@@ -74,7 +74,7 @@ def tomar_input():
 """
 Propósito: este parte del código tiene como propósito hace todas las evaluaciones para conocer si 
 la nota se encuentra dentro de la escala puesta por la llave, y si es esto es verdadero entonces 
-leer la dirección y la posición donde cae.   
+leer la dirección y la posición donde cae.    
 """
 for single_input in tomar_input():
     key = single_input[0]
