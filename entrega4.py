@@ -5,7 +5,6 @@ Código de honor: Como miembro de la comunidad académica de la Pontificia Unive
 a seguir los más altos estándares de integridad académica.
 """
 
-
 # C/B# C#/Db D D#/Eb E/Fb F/E# F#/Gb G G#/Ab A A#/Bb B/Cb
 scale = {"B#": 0, "C#": 1, "D": 2, "D#": 3, "Fb": 4, "E#": 5, "F#": 6, "G": 7, "G#": 8, "A": 9, "A#": 10, "Cb": 11}
 scale_2 = {"C": 0, "Db": 1, "D": 2, "Eb": 3, "E": 4, "F": 5, "Gb": 6, "G": 7, "Ab": 8, "A": 9, "Bb": 10, "B": 11}
@@ -22,10 +21,9 @@ Entrada = key --> la nota principal que se toma como una llave, scale, scale_2, 
   
 Salida = major_scale_pos, major_scale. 
 
-Propósito = Darnos una lista que contiene las notas que son aceptadas, teniendo en cuanta 
-el tono y semitono (lista).
-Ademas de un diccionario a posición de estas mismas notas, teniendo en cuenta los tonos y 
-semitonos que se utilizan, representada por el valor en el diccionario 
+Propósito = Darnos una lista que contiene las notas que se generan a partir de una llave y siguiendo la secuencia 
+llave-tono-tono-semitono-tono-tono-tono-semitono, también retorna un diccionario que dice en que posición se encuentra 
+la nota en la escala mayor generada por la llave 
 """
 
 
@@ -52,62 +50,72 @@ def generate_major_scale(key):
 
 
 """
-Función = tomar input
+Función = take input
 
-Entrada = todos los inputs que realice el usuario hasta que encuentre vació 
+Entrada = todos los inputs que realice el usuario hasta que encuentre vació (linea en blanco)
 
-Salida = todas las llaves y todas las instrucciones para cada llave 
+Salida = lista de listas con todas las llaves y sus respectivas escalas a calcular
 
-Propósito = Darnos los inputs que el usuario nos da y guardarlos en dos variables llamadas "key" y
-"queries", con key --> la nota llave, quieres --> las indicaciones que evaluamos la nota con la 
-llave
+Propósito = Tomar los inputs que el usuario nos da y guardarlos en dos variables llamadas "key" y
+"queries", con key --> la nota llave, queries --> las notas, intervalos y direcciones 
 """
-def tomar_input():
+
+
+def take_input():
     inputs = []
     while True:
         key = input()
-        if key == "":
+        if key == "":  # Caso de parada
             return inputs
         queries = input()
         inputs.append((key, queries))
 
+
 """
-Propósito: este parte del código tiene como propósito hace todas las evaluaciones para conocer si 
-la nota se encuentra dentro de la escala puesta por la llave, y si es esto es verdadero entonces 
-leer la dirección y la posición donde cae.    
+Función = problema_449
+
+Entrada = Nada
+
+Salida = Por cada llave se imprime con el formato especificado el resultado del cálculo de cada intervalo
+
+Propósito: Por cada input dado por el usuario generar la escala mayor de cada clave y luego con esa escala calcular
+la nota resultado de evaluar el intervalo dado e imprimirla con el formato deseado para el problema.
 """
-for single_input in tomar_input():
-    key = single_input[0]
-    queries = single_input[1].split(";")
-    print("Key of", key)
-    major_scale_pos, major_scale = generate_major_scale(key)
-    # print(major_scale)
-    for query in queries:
-        note, direction, interval = query.split(" ")
-        was_scale_2 = True
 
-        if note in scale:
-            was_scale_2 = False
-            if note in scale_2:
-                was_scale_2 = True
-            note_2 = notes_2[scale[note]]
-        else:
-            note_2 = note
-            note = notes[scale_2[note]]
 
-        if note_2 not in major_scale_pos:
-            if was_scale_2:
-                print(f"{note_2}: invalid note for this key")
-            else:
-                print(f"{note}: invalid note for this key")
-        else:
-            if direction == "UP":
-                next_note = major_scale[(major_scale_pos[note_2] + translation[interval]) % 7]
-            else:
-                next_note = major_scale[(major_scale_pos[note_2] - translation[interval]) % 7]
+def problema_449():
+    for single_input in take_input():
+        key = single_input[0]
+        queries = single_input[1].split(";")
+        print("Key of", key)
+        major_scale_pos, major_scale = generate_major_scale(key)
+        # print(major_scale)
+        for query in queries:
+            note, direction, interval = query.split(" ")
+            was_scale_2 = True
 
-            if was_scale_2:
-                print(f"{note_2}: {direction} {interval} > {next_note}")
+            if note in scale:
+                was_scale_2 = False
+                if note in scale_2:
+                    was_scale_2 = True
+                note_2 = notes_2[scale[note]]
             else:
-                print(f"{note}: {direction} {interval} > {notes[scale_2[next_note]]}")
-    print()
+                note_2 = note
+                note = notes[scale_2[note_2]]
+
+            if note_2 not in major_scale_pos:
+                if was_scale_2:
+                    print(f"{note_2}: invalid note for this key")
+                else:
+                    print(f"{note}: invalid note for this key")
+            else:
+                if direction == "UP":
+                    next_note = major_scale[(major_scale_pos[note_2] + translation[interval]) % 7]
+                else:
+                    next_note = major_scale[(major_scale_pos[note_2] - translation[interval]) % 7]
+
+                if was_scale_2:
+                    print(f"{note_2}: {direction} {interval} > {next_note}")
+                else:
+                    print(f"{note}: {direction} {interval} > {notes[scale_2[next_note]]}")
+        print()
