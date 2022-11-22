@@ -22,8 +22,8 @@ Entrada = key --> la nota principal que se toma como una llave, scale, scale_2, 
   
 Salida = major_scale_pos, major_scale. 
 
-Propósito = darnos una lista que contiene las notas que son aceptadas,
-teniendo en cuanta el tono y semitono (lista).
+Propósito = Darnos una lista que contiene las notas que son aceptadas, teniendo en cuanta 
+el tono y semitono (lista).
 Ademas de un diccionario a posición de estas mismas notas, teniendo en cuenta los tonos y 
 semitonos que se utilizan, representada por el valor en el diccionario 
 """
