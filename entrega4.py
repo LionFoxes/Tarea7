@@ -117,7 +117,10 @@ def problema_449():
                     next_note = major_scale[(major_scale_pos[note_2] - translation[interval]) % 7]
 
                 if was_scale_2:
-                    print({note_2}, ":", {direction}, {interval}, ">", {next_note})
+                    print(note_2, ":", direction, interval, ">", next_note)
                 else:
-                    print({note}, ":", {direction}, {interval}, ">", {notes[scale_2[next_note]]})
+                    print(note, ":", direction, interval, ">", {notes[scale_2[next_note]]})
         print()
+
+
+problema_449()
